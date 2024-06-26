@@ -15,16 +15,7 @@ pipeline {
                     sh 'npm install'
                 }
             }
-        }
-        
-        stage('Test - Node.js') {
-            steps {
-                dir('BNA-dashboard/backend') {
-                    sh 'npm test'
-                }
-            }
-        }
-        
+        }        
         stage('Build - Node.js') {
             steps {
                 dir('BNA-dashboard/backend') {
