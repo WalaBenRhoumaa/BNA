@@ -1,23 +1,61 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'NodeJS 20.12.2' // Ensure this matches the name you configured in Global Tool Configuration
-    }
-
-    environment {
-        NODE_ENV = 'development'
-    }
-
     stages {
-        stage('Checkout') {
+        stage('Checkout Git repository') {
             steps {
-                // Replace with your SCM repository URL and branch name
-                git url: 'https://github.com/WalaBenRhoumaa/BNA', branch: 'main'
+                echo 'Pulling'
+                git branch: 'NADIA', url: 'https://github.com/ipactconsult/BNA_SmartFuture_Workshop_React_Web.git'
             }
         }
-
-        // Other stages will be added here
+        stage('Install dependencies - Node.js') {
+            steps {
+                dir('BNA-dashboard/backend') {
+                    // Installation des dépendances pour le sous-projet Node.js
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('Test - Node.js') {
+            steps {
+                dir('BNA-dashboard/backend') {
+                    // Exécution des tests unitaires pour le sous-projet Node.js
+                    sh 'npm test'
+                }
+            }
+        }
+        stage('Build - Node.js') {
+            steps {
+                dir('BNA-dashboard/backend') {
+                    // Construire le backend Node.js
+                    sh 'npm run build'
+                }
+            }
+        }
+        stage('Install dependencies - React') {
+            steps {
+                dir('BNA-dashboard/admin') {
+                    // Installation des dépendances pour le projet React
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('Test - React') {
+            steps {
+                dir('BNA-dashboard/admin') {
+                    // Exécution des tests unitaires pour le projet React
+                    sh 'npm test -- --coverage --watchAll=false'
+                }
+            }
+        }
+        stage('Build - React') {
+            steps {
+                dir('BNA-dashboard/admin') {
+                    // Construire le projet React
+                    sh 'npm run build'
+                }
+            }
+        }
     }
 
     post {
