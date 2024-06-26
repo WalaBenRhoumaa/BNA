@@ -22,18 +22,20 @@ pipeline {
 
     post {
         always {
-            // Archive artifacts
-            archiveArtifacts artifacts: '**/build/**/*.*', allowEmptyArchive: true
-            // Publish test results
-            junit 'reports/**/*.xml'
+            // Archivage des résultats des tests pour Node.js
+            dir('BNA-dashboard/backend') {
+                junit 'test-results.xml'
+            }
+            // Archivage des résultats des tests pour React
+            dir('BNA-dashboard/admin') {
+                junit 'coverage/junit/results.xml'
+            }
         }
-
         success {
-            echo 'Build succeeded!'
+            echo 'Build and tests completed successfully!'
         }
-
         failure {
-            echo 'Build failed!'
+            echo 'Build or tests failed.'
         }
     }
 }
