@@ -42,16 +42,6 @@ pipeline {
     }
     
     post {
-        always {
-            // Archive Node.js test results
-            dir('BNA-dashboard/backend') {
-                junit 'test-results.xml'
-            }
-            // Archive React test results
-            dir('BNA-dashboard/admin') {
-                junit 'coverage/junit/results.xml'
-            }
-        }
         success {
             echo 'Build and tests completed successfully!'
         }
