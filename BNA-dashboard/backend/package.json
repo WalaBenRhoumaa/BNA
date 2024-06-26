@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --reporter mocha-junit-reporter --reporter-options mochaFile=backend/test-results.xml"
   },
   "keywords": [],
   "author": "",
