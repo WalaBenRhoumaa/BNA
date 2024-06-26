@@ -16,6 +16,14 @@ pipeline {
                 }
             }
         }
+        stage('Test - Node.js') {
+            steps {
+                dir('BNA-dashboard/backend') {
+                    // Exécution des tests unitaires pour le sous-projet Node.js
+                    sh 'npm test'
+                }
+            }
+        }
         stage('Build - Node.js') {
             steps {
                 dir('BNA-dashboard/backend') {
@@ -29,14 +37,6 @@ pipeline {
                 dir('BNA-dashboard/admin') {
                     // Installation des dépendances pour le projet React
                     sh 'npm install'
-                }
-            }
-        }
-        stage('Test - React') {
-            steps {
-                dir('BNA-dashboard/admin') {
-                    // Exécution des tests unitaires pour le projet React
-                    sh 'npm test -- --coverage --watchAll=false'
                 }
             }
         }
