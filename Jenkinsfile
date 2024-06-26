@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout Git repository') {
             steps {
                 echo 'Pulling'
-                git branch: 'NADIA', url: 'https://github.com/ipactconsult/BNA_SmartFuture_Workshop_React_Web.git'
+                git branch: 'main', url: 'https://github.com/WalaBenRhoumaa/BNA'
             }
         }
         stage('Install dependencies - Node.js') {
