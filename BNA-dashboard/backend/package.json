@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index",
-    "test": "mocha --reporter mocha-junit-reporter --reporter-options mochaFile=backend/test-results.xml"
+    "test": "mocha 'test/**/*.js' --recursive --reporter mocha-junit-reporter --reporter-options mochaFile=./test-results.xml"
   },
   "keywords": [],
   "author": "",
