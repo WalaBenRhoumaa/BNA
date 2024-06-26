@@ -1,8 +1,0 @@
-{
-  "devDependencies": {
-    "jest-junit": "^16.0.0"
-  },
-  "scripts": {
-    "test": "jest --reporters=default jest-junit"
-  }
-}
